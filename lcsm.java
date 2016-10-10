@@ -71,10 +71,10 @@ public class lcsm {
             String this_seq = list.get(i);
             int found_at = this_seq.lastIndexOf(snippet);
 
-            if (found_at >= 0) {
-            } else {
+            // if it's missing from any of the strings, stop the search
+            if (found_at < 0) {
                 is_found_everywhere = false;
-                break; // if it's missing from any, stop the search
+                break;
             }
         }
         return is_found_everywhere;
