@@ -34,9 +34,9 @@ public class lcsm {
         String shortest_seq = find_shortest_seq(list);
         int size_of_shortest_seq = shortest_seq.length();
 
-        // We'll try one size at a time, from 2bp up to length of the shortest seq (best case repeat)
+        // We'll try one size at a time, from 2bp up to length of the shortest seq (best case scenario)
         // When you find a common string of one size, save and go to the next size up
-        // Return the longest that we successfully found in all of the sequences
+        // Return the longest one that's found in all of the sequences
 
         // Try one size at a time
         for (int i = 2; (i < size_of_shortest_seq) && !found_the_answer; i++) {
