@@ -14,7 +14,7 @@ public class lcsm {
 
         // Use fasta_utils to extract list of sequences from fasta file
         String file_to_use = "C:\\Users\\Diane\\Documents\\GitHub\\playtime\\JavaPlaytime\\src\\src\\rosalind\\dna.txt";
-        List seq_list = rosalind.fasta_utils.get_seq_strings(file_to_use);
+        List<String> seq_list = rosalind.fasta_utils.get_seq_strings(file_to_use);
 
         System.out.println("Longest common substring is: " + find_longest_substring(seq_list));
     }
@@ -47,10 +47,12 @@ public class lcsm {
 
                 // For this snippet, test whether it is found in all the other strings
                 // If so, save it as our winner, break, and go to the next size
+                // Also reset j to 0 so we start at the beginning of the string
                 if (check_all_strings (temp_snippet, list )) {
                     winning_substring = temp_snippet;
                     if (DEBUG) {System.out.println(temp_snippet + " is a winner");}
                     i++;
+                    j = 0;
                 }
                 // If we reach the end of the first string without a winner for that length,
                 // we won't improve and our saved choice is the best
