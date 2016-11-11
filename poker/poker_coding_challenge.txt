@@ -1,0 +1,69 @@
+Please complete the following problem at least a full day prior to coming in for 
+your interview. You may feel free to use any resources that you wish and the 
+problem can be completed in the language of your choice.
+
+Despite being a toy problem the purpose of this exercise is to gauge how you 
+develop software as a whole, including design, documentation, and testing. We'll 
+be paying attention to how you strike that balance. A clever one-line solution 
+will make us smile but won't give us any insight into how you work on more complex 
+projects, so we'd prefer it if you avoided them. Same goes for importing an 
+external library that completely solves the problem for you, although of course 
+things like Google and Stack Overflow are more than acceptable!
+
+How long should you spend on this? As much time as you want. We know you have 
+other things going on in your life, so if you're not finished after a few hours, 
+that's absolutely fine - submit as much as you have, and we can talk about that. 
+We're interested in your approach to the problem, not how fast you code. In 
+particular we’d rather see a clean solution which gets most of the way there 
+which is well documented and tested vs. a solution which correctly resolves 
+every possible edge case. There are no trick questions involved here, we just 
+want to see how you work.
+
+If you have any questions along the way please do not hesitate to send them to dsde-engineering-hiring@broadinstitute.org
+
+Your deliverables should include:
+
+All code written
+A buildable & executable program which can demonstrate all three of these functions 
+working, along with documentation on how to run your program
+Any supplementary files such as tests, documentation, etc.
+
+When complete, create a tarball or zip archive of your files and email it to 
+dsde-engineering-hiring@broadinstitute.org
+Problem statement
+
+Poker is a game played with a standard 52-card deck of cards 
+(https://en.wikipedia.org/wiki/Standard_52-card_deck), in which players attempt 
+to make the best possible 5-card hand according to the ranking of the categories 
+given at the following site:  http://www.pokerlistings.com/poker-hand-ranking. 
+If you are unfamiliar with poker we recommend that you familiarize yourself with 
+this list. The provided link also has a short video explaining how these hands work.
+
+In this challenge, you may assume:
+A single 52 card deck will be in use
+No wild cards
+Aces are treated as high cards only
+
+Cards will be represented by their number or first letter for the non-numeric 
+cards (J, Q, K, A) and the suits will be represented by their first letter 
+(H, C, D, S) and stored as a JSON array. So for example a hand J? 4? 4? J? 9? 
+will be represented as ["JH", "4C", "4S", "JC", "9H"] . 
+
+When a category involves less than 5 cards, the next highest cards are added as 
+“kickers” for the sake of breaking ties.  For example, a pair of queens with a 
+king beats a pair of queens with a 10.
+
+#1. Write a function that takes a 5-card hand as a JSON array and determines its 
+category, with any tie breaking information that is necessary.  For example, the 
+input  ["JH", "4C", "4S", "JC", "9H"] would have the value of two pair: jacks 
+and 4s with a 9 kicker. You may choose your own representation for the output.
+
+#2. Write a function that takes 2 or more 5-card hands and determines the winner.
+
+Some poker variations use more than 5 cards per player, and the player chooses 
+the best subset of 5 cards to play.
+
+#3. Write a function that takes 5 or more cards and returns the best 5-card hand 
+that can be made with those cards.  For example, the input 
+[“3H”, “7S”, “3S”, “QD”, “AH”, “3D”, “4S”] should return [“3H”, “3S”, “3D”, “AH”, “QD”], 
+which is a 3-of-a-kind with 3s, ace and queen kickers.
