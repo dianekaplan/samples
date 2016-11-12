@@ -6,7 +6,7 @@
 #     % python exercise_poker_functions.py 
 
 from load_data import load_hands 
-from poker_functions import read_hand, compare_hands #, compare_multiple_hands, find_best_hand
+from poker_functions_v2 import read_hand, compare_hands #, compare_multiple_hands, find_best_hand
 #import profile  # uncomment, with last line, to see call count/times/etc
 
 all_hands = load_hands()
