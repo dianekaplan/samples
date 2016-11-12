@@ -1,7 +1,7 @@
 
 ===File list: 
 exercise_poker_functions.py	Demonstrate poker functions
-poker_functions.py		Functions for reading & comparing poker hands
+poker_functions_v2.py		Functions for reading & comparing poker hands
 load_data.py			File to load the data we'll use 
 
 ===Usage: 
@@ -20,8 +20,9 @@ load_data.py and pickle load on poker.functions.py?)
 
 ===Open issues: 
 - read_hand(), two pair case: comparison line not working until I reversed the order (1 vs 2, then 0 vs 1)
-- read_hand(), two pair case: updating kicker not working 
 - read_hand(), two pair case: not recognizing second pair when it's smaller than the kicker 
-- refactoring issue in poker_functions.py lines 138-152
 - read_hand() is really long, review for better organization
+
+- read_hand(), two pair case: updating kicker not working (fixed in v2)
+- refactoring issue in poker_functions.py lines 138-152 (fixed in v2)
 

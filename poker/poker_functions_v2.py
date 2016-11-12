@@ -7,7 +7,7 @@ import numpy
 DEBUG = False
 
 
-##  https://pymotw.com/2/collections/namedtuple.html
+# First, save names and values for our hand types # v2 comment 
 from collections import namedtuple
 
 hand_info = namedtuple('hand_info', 'name value')
@@ -31,7 +31,6 @@ def compare_hands(hand_1, hand_2):
     
     hand_1_outcome = read_hand(hand_1)
     hand_2_outcome = read_hand(hand_2)
-    winner = 'Tie'; # initialize to tie 
     
     if  hand_1_outcome[1] > hand_2_outcome[1]: 
         winner = hand_1
@@ -128,29 +127,12 @@ def read_hand(hand):
     # otherwise (highest_freq > 1), let's look into the repeats
     else: 
         # When we have multiples, we'll also need the hand's remainder (the other cards)
-        # For readability, save the highest_freq and most_repeated_value into
-        # number_of_cards_to_remove and value_to_remove variables
-        number_of_cards_to_remove = highest_freq
+        # For readability, save the most_repeated_value into value_to_remove 
         value_to_remove = most_repeated_value
         
-        # Get the remainder of the hand
-
-        # WANT TO JUST DO THIS, BUT ValueError: list.remove(x): x not in list---     
-        #remainder = get_remainder(values_list, number_of_cards_to_remove, value_to_remove)
-        #kicker = max(remainder)
-
-        # CLUNKIER/WORKING APPROACH IT REPLACES
-        # If needed, the kicker will be highest among the OTHER cards
-        # check whether our repeats are at the max end of the hand or not
-        # if repeated card is less than the max, kicker is the max
-        if most_repeated_value < values_list[4]: 
-            kicker = values_list[4]
-               
-        ## otherwise, kicker is the highest value before our repeated cards
-        else: 
-            kicker = values_list[4-number_of_cards_to_remove]
-        # ---------------------------------------------------------------------        
-
+        # Get the remainder of the hand    
+        remainder = get_remainder(values_list, value_to_remove)
+        kicker = max(remainder)
 
         # Four of a kind 
         if highest_freq == 4:
@@ -160,15 +142,8 @@ def read_hand(hand):
         if highest_freq == 3:
             verdict = [TK.name, TK.value, kicker]
             
-            # CAN BE REPLACED ONCE LINES 139-140 ARE WORKING 
-            # check for full house (are the other two cards a pair?)
-            # trim down this list to only the remainder after our triple
-            for x in range(0, 3):
-                values_list.remove(value_to_remove)
-        
             # check if that remainder is a pair (if yes, full house)
-            #if remainder[0] == remainder[1]:
-            if values_list[0] == values_list[1]:
+            if remainder[0] == remainder[1]: # v2 FIX
                 verdict = [FH.name, FH.value, kicker]
 
         # One pair 
@@ -176,21 +151,19 @@ def read_hand(hand):
             verdict = [OP.name, OP.value, kicker] 
             
             # if remaining 3 cards contains a pair, update to 2 pair and update kicker
-            remainder = get_remainder(values_list, number_of_cards_to_remove, value_to_remove)
+            remainder = get_remainder(values_list, value_to_remove)
             
             # Two pair 
             if ( remainder[1] == remainder[2] | remainder[0] == remainder[1] ) : 
-                verdict = [TP.name, TP.value, kicker] 
-                    
-                # update kicker- this time pass that remaining set of cards
+
+                # update kicker- this time, pass that remaining set of cards
                 # prep: update the value of pair to remove to the center value, 
                 # and highest_freq
                 value_to_remove = remainder[1]
-                number_of_cards_to_remove = 2 
-                remainder = get_remainder(remainder, number_of_cards_to_remove, value_to_remove)      
+                remainder = get_remainder(remainder, value_to_remove)      
                 kicker = remainder    
 
-
+                verdict = [TP.name, TP.value, kicker] # v2 FIX
                                
         
     # evaluate hands that aren't multiples
@@ -246,13 +219,11 @@ def parse_suits_and_values(hand):
     
     return numeric_values_list, suit_list
 
-
-def get_remainder(values_list, number_of_cards_to_remove, value_to_remove): 
-
-    # set remainder to our values list, then remove the repeated value
-    remainder=values_list;
-    for x in range(0, number_of_cards_to_remove):
-        values_list.remove(value_to_remove)
     
+def get_remainder(values_list, value_to_remove): 
+    remainder = [value for value in values_list if value != value_to_remove] # v2 FIX
     return remainder
+    
+
+
 
